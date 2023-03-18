@@ -19,7 +19,7 @@ const Footer = () => {
         <br />
         <br />
         <div className="text-base ">
-          <div className="flex flex-auto items-center gap-3 justify-end"></div>
+          <div className="flex flex-auto items-center gap-3 justify-end">
             <FaFacebookF className=" cursor-pointer text-lg" />
             <BsGoogle className=" cursor-pointer text-lg" />
             <GrInstagram className=" cursor-pointer text-lg" />© 2023 Copyright:
