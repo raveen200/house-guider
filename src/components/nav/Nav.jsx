@@ -75,7 +75,9 @@ export const Nav = () => {
               About Us
             </li>
             <li classname="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
+              <Link to={"/login"}>
               Service
+              </Link>
             </li>
           </motion.ul>
 
