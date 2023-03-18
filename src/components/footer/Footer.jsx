@@ -6,12 +6,12 @@ import { GrInstagram } from "react-icons/gr";
 
 const Footer = () => {
   return (
-    <div className=" h-32 rounded-lg  flex  items-center   border-2 border-green-300 drop-shadow-md">
-      <div class="grid  grid-rows-3 grid-flow-col gap-4 items-center mx-8">
+    <div className=" h-32 w-auto p-8 rounded-lg  flex  items-center ml-6 mr-6 mb-4 border-2 border-green-300 drop-shadow-md">
+      <div class="grid  grid-rows-3 grid-flow-col gap-8 items-center mx-6">
         <div class="row-span-3 ">
           <img src={logo} alt="logo" className="w-56 h-auto " />
         </div>
-        <div class="col-span-1 row-span-3 text-sm  text-right">
+        <div class="col-span-1 row-span-3 text-sm  text-right ">
           Explore the world with our curated travel guides, insider tips, and
           unbeatable deals. Plan your next adventure with us and make
           unforgettable memories. Book now and let us help you create your dream

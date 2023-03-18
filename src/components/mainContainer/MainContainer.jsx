@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Footer, HomeContainer, MenuContainer, RowContainer } from "..";
+import { HomeContainer, MenuContainer, RowContainer } from "..";
 import { motion } from "framer-motion";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { UseStateValue } from "../context/StateProvider";
@@ -53,7 +53,7 @@ export const MainContainer = () => {
 
       <section className="w-full my-6">
         <MenuContainer />
-        <Footer />
+        
       </section>
     </div>
   );
