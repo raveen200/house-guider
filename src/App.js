@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { Nav, MainContainer, CreateContainer, Login, Footer } from "./components";
+import { Nav, MainContainer, CreateContainer, Login, Footer, SignUp } from "./components";
 import { getAllItems } from "./utils/firebaseFunctions";
 import { actionTypes } from "./components/context/reducer";
 import { UseStateValue } from "./components/context/StateProvider";
@@ -32,6 +32,7 @@ const App = () => {
             <Route path="/*" element={<MainContainer />} />
             <Route path="/createitem" element={<CreateContainer />} />
             <Route path="/login" element={<Login/>} />
+            <Route path="/signup" element={<SignUp/>}/>
           </Routes>
         </main>
         <Footer />

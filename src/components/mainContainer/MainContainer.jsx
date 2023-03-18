@@ -25,7 +25,7 @@ export const MainContainer = () => {
             Our Guest Houses and Locations
           </p>
 
-          <div className="hidden md:flex gap-3 items-center z-50">
+          <div className="hidden md:flex gap-3 items-center z-10">
             <motion.div
               whileTap={{ scale: 0.75 }}
               className="w-8 h-8 rounded-lg bg-green-300 hover:bg-green-500 cursor-pointer  hover:shadow-lg

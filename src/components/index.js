@@ -7,3 +7,4 @@ export { default as RowContainer } from "../components/rowContainer/rowContainer
 export { default as MenuContainer } from "../components/menuContainer/MenuContainer";
 export { default as Footer } from "../components/footer/Footer";
 export { default as Login } from "../components/login/Login";
+export { default as SignUp } from "../components/signUp/Signup";

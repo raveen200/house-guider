@@ -1,4 +1,5 @@
-import { getApp, getApps, initializeApp } from "firebase/app";
+import { getApp, getApps, initializeApp, } from "firebase/app";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
@@ -19,3 +20,6 @@ const firestore = getFirestore(app);
 const storage = getStorage(app);
 
 export { firestore, storage, app };
+
+
+

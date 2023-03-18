@@ -44,16 +44,14 @@ export const Nav = () => {
     });
   };
 
+  console.log(user);
+
   return (
     <header className="fixed z-50 w-screen p-3 px-4 md:p-6 md:px-16 bg-green-50 ">
       {/**/}
       <div className="hidden md:flex w-full h-full items-center justify-between">
         <Link to={"/"} className="flex items-center gap-2">
-          <img
-            src={Logo}
-            className="max-h-12 object-cover "
-            alt="logo"
-          />
+          <img src={Logo} className="max-h-12 object-cover " alt="logo" />
         </Link>
 
         <div className="flex items-center gap-8">
@@ -64,38 +62,40 @@ export const Nav = () => {
             className="flex items-center gap-12"
           >
             <li classname="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
-              <Link to={"/"}>
-              Home
-              </Link>
+              <Link to={"/"}>Home</Link>
             </li>
             <li classname="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
               Menu
             </li>
             <li classname="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
-              About Us
+              <Link to={"/signup"}>About Us</Link>
             </li>
             <li classname="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
-              <Link to={"/login"}>
-              Service
-              </Link>
+              <Link to={"/login"}>Service</Link>
             </li>
           </motion.ul>
 
-          <div className="relative flex items-center justify-center">
+          {/* <div className="relative flex items-center justify-center">
             <MdLocationOn className="text-color text-2xl  cursor-pointer " />
             <div className="absolute -top-2.5 -right-1.5 w-6 h-6 rounded-full bg-cartNumBg flex items-center justify-center">
               <p className="text-center text-sm text-white font-semibold">2</p>
             </div>
-          </div>
+          </div> */}
 
           <div className="relative">
-            <motion.img
-              whileTap={{ scale: 0.6 }}
-              src={user ? user.photoURL : UserDp}
-              className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-md rounded-full object-cover"
-              alt="userDp"
-              onClick={login}
-            />
+            
+              <div className="flex justify-center">
+              <motion.img
+                whileTap={{ scale: 0.6 }}
+                src={user ? user.photoURL : UserDp}
+                className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-md rounded-full object-cover "
+                alt="userDp"
+                onClick={login}
+              />
+              </div>
+              <div>{user ? user.displayName : ""}</div>
+            
+
             {isMenu && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.6 }}
