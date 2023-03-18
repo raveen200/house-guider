@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {  HomeContainer, MenuContainer, RowContainer } from "..";
+import { Footer, HomeContainer, MenuContainer, RowContainer } from "..";
 import { motion } from "framer-motion";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { UseStateValue } from "../context/StateProvider";
@@ -7,9 +7,10 @@ import { UseStateValue } from "../context/StateProvider";
 export const MainContainer = () => {
   const [{ items }, dispatch] = UseStateValue();
   const [scrollValue, setScrollValue] = useState(0);
+  const [filter, setFilter] = useState("Central Province");
+  
 
-  useEffect(() => {}, [scrollValue]);
-
+  useEffect(() => {},[scrollValue]);
   return (
     <div className="w-full h-auto flex-col items-center justify-center ">
       <HomeContainer />
@@ -46,13 +47,13 @@ export const MainContainer = () => {
         <RowContainer
           scrollValue={scrollValue}
           flag={true}
-          data={items?.filter((n) => n.province === "Western Province")}
+          data={items}
         />
       </section>
 
       <section className="w-full my-6">
         <MenuContainer />
-     
+        <Footer />
       </section>
     </div>
   );

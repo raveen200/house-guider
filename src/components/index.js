@@ -5,4 +5,4 @@ export { default as HomeContainer } from "./homeContainer/HomeContainer";
 export { default as Loader } from "./loader/Loader";
 export { default as RowContainer } from "../components/rowContainer/rowContainer";
 export { default as MenuContainer } from "../components/menuContainer/MenuContainer";
-
+export { default as Footer } from "../components/footer/Footer";

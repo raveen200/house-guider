@@ -1,13 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "..//assets//images//logoA.svg";
+import Logo from "../assets/images/logoA.png";
 import { MdLocationOn, MdAdd, MdLogout } from "react-icons/md";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from "../../firebase.config";
 
 import { motion } from "framer-motion";
-import UserDp from "..//assets//images//avatar-man.png";
+import UserDp from "../assets/images/avatar-man.png";
 
 import { actionTypes } from "../context/reducer";
 import { UseStateValue } from "../context/StateProvider";
@@ -64,7 +64,9 @@ export const Nav = () => {
             className="flex items-center gap-12"
           >
             <li classname="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
+              <Link to={"/"}>
               Home
+              </Link>
             </li>
             <li classname="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
               Menu
