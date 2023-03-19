@@ -1,32 +1,16 @@
-import { async } from "@firebase/util";
+
 import {
   createUserWithEmailAndPassword,
   getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
+  
 } from "firebase/auth";
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { motion } from "framer-motion";
-import { UseStateValue } from "../context/StateProvider";
-import { actionTypes } from "../context/reducer";
+
+const firebaseAuth = getAuth();
 
 
-export const firebaseAuth = getAuth();
-const provider = new GoogleAuthProvider();
-//  const [{ user }, dispatch] = UseStateValue();
-
-
-const login = async () => {
-  const {
-    user: { providerData },
-  } = await signInWithPopup(firebaseAuth, provider);
-  // {
-  //   type: actionTypes.SET_USER,
-  //   user: providerData[0],
-  // };
-  localStorage.setItem("user", JSON.stringify(providerData[0]));
-};
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
@@ -67,7 +51,7 @@ const Signup = () => {
     setFormFeild({ ...formFeild, [name]: value });
   };
 
-  console.log(user);
+  
 
   return (
     <section className="h-screen">
@@ -98,8 +82,8 @@ const Signup = () => {
                   name="userName"
                   value={userName}
                   type="text"
-                  class="text-base font-semibold   peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[2.15]"
-                  id="exampleFormControlInput3"
+                  class="text-base font-semibold text-green-800  peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[2.15]"
+                  
                   placeholder="User Name"
                 />
               </div>
@@ -113,7 +97,7 @@ const Signup = () => {
                   value={email}
                   type="email"
                   class="text-base font-semibold   peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[2.15]"
-                  id="exampleFormControlInput3"
+                 
                   placeholder="Email address"
                 />
               </div>
@@ -128,7 +112,7 @@ const Signup = () => {
                   value={password}
                   type="password"
                   class="text-base font-semibold   peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[2.15]"
-                  id="exampleFormControlInput33"
+                 
                   placeholder="Password"
                 />
               </div>
@@ -143,7 +127,7 @@ const Signup = () => {
                   value={confirmPassword}
                   type="password"
                   class="text-base font-semibold   peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[2.15]"
-                  id="exampleFormControlInput33"
+                 
                   placeholder="Confirm Password"
                 />
               </div>
@@ -177,7 +161,7 @@ const Signup = () => {
                        hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:bg-info-600
                         focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)]
                        focus:outline-none focus:ring-0 active:bg-info-700 active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)]"
-                onClick={login}
+                onClick={"loginWithGoogle()"}
                 role="button"
                 data-te-ripple-init
                 data-te-ripple-color="light"
@@ -185,8 +169,6 @@ const Signup = () => {
                 <FcGoogle className="text-2xl" />
                 Continue with Google
               </motion.div>
-
-              
             </form>
           </div>
         </div>

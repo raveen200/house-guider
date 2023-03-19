@@ -44,7 +44,7 @@ export const Nav = () => {
     });
   };
 
-  console.log(user);
+  // console.log(user);
 
   return (
     <header className="fixed z-50 w-screen p-3 px-4 md:p-6 md:px-16 bg-green-50 ">
@@ -61,17 +61,17 @@ export const Nav = () => {
             exit={{ opacity: 0, x: 200 }}
             className="flex items-center gap-12"
           >
-            <li classname="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
+            <li classname="text-base text-textColor hover:text-headingColor  cursor-pointer">
               <Link to={"/"}>Home</Link>
             </li>
-            <li classname="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
+            <li classname="text-base text-textColor hover:text-headingColor  cursor-pointer">
               Menu
             </li>
-            <li classname="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
-              <Link to={"/signup"}>About Us</Link>
+            <li classname="text-base text-textColor hover:text-headingColor  cursor-pointer">
+              <Link to={"/"}>About Us</Link>
             </li>
-            <li classname="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
-              <Link to={"/login"}>Service</Link>
+            <li classname="text-base text-textColor bg-black hover:text-headingColor  cursor-pointer">
+              <Link to={"/login"}>Sign in</Link>
             </li>
           </motion.ul>
 
@@ -83,8 +83,7 @@ export const Nav = () => {
           </div> */}
 
           <div className="relative">
-            
-              <div className="flex justify-center">
+            <div className="flex justify-center">
               <motion.img
                 whileTap={{ scale: 0.6 }}
                 src={user ? user.photoURL : UserDp}
@@ -92,9 +91,10 @@ export const Nav = () => {
                 alt="userDp"
                 onClick={login}
               />
-              </div>
-              <div>{user ? user.displayName : ""}</div>
-            
+            </div>
+            <div className="font-semibold opacity-50">
+              {user ? user.displayName : ""}
+            </div>
 
             {isMenu && (
               <motion.div
