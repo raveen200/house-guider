@@ -15,7 +15,14 @@ export const saveItem = async (data) => {
   });
 };
 
-// getall items
+// Saving new User and updating existing user data
+export const saveUser = async (udata) => {
+  await setDoc(doc(firestore, "Users", udata.uid), udata, {
+    merge: true,
+  });
+};
+
+// getAll items
 export const getAllItems = async () => {
   const items = await getDocs(
     query(collection(firestore, "Items"), orderBy("id", "desc"))
@@ -23,3 +30,13 @@ export const getAllItems = async () => {
 
   return items.docs.map((doc) => doc.data());
 };
+
+
+//getAllUsers
+export const getAllUsers = async () => {
+  const users = await getDocs(
+    query(collection(firestore, "Users"), orderBy("UID", "desc"))
+  );
+
+  return users.docs.map((doc) => doc.data());
+}

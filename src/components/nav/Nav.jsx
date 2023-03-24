@@ -4,13 +4,15 @@ import { Link } from "react-router-dom";
 import Logo from "../assets/images/logoA.png";
 import { MdLocationOn, MdAdd, MdLogout } from "react-icons/md";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { app } from "../../firebase.config";
+import { app, firestore } from "../../firebase.config";
+import { AiOutlineEye } from "react-icons/ai";
 
 import { motion } from "framer-motion";
 import UserDp from "../assets/images/avatar-man.png";
 
 import { actionTypes } from "../context/reducer";
 import { UseStateValue } from "../context/StateProvider";
+import { getAllUsers, saveUser } from "../../utils/firebaseFunctions";
 
 export const Nav = () => {
   const firebaseAuth = getAuth(app);
@@ -28,12 +30,29 @@ export const Nav = () => {
       dispatch({
         type: actionTypes.SET_USER,
         user: providerData[0],
+       
       });
+    
       localStorage.setItem("user", JSON.stringify(providerData[0]));
     } else {
       setIsMenu(!isMenu);
     }
   };
+
+if (user) {
+    const udata ={
+        id: `${user.uid}`,
+        name: user.displayName,
+        email: user.email,
+        photo: user.photoURL,
+        uid: user.uid,
+    
+    
+      };
+      saveUser(udata);
+    }
+
+ 
 
   const logout = () => {
     setIsMenu(false);
@@ -44,7 +63,7 @@ export const Nav = () => {
     });
   };
 
-  // console.log(user);
+  //  console.log(user);
 
   return (
     <header className="fixed z-50 w-screen p-3 px-4 md:p-6 md:px-16 bg-green-50 ">
@@ -111,6 +130,17 @@ export const Nav = () => {
                       onClick={() => setIsMenu(false)}
                     >
                       New Item <MdAdd />
+                    </p>
+                  </Link>
+                )}
+                {user && user.email === "raveensamudika@gmail.com" && (
+                  <Link to={"/summaryview"}>
+                    <p
+                      className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out
+                     text-textColor text-base"
+                      onClick={() => setIsMenu(false)}
+                    >
+                      Summary <AiOutlineEye />
                     </p>
                   </Link>
                 )}

@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { Nav, MainContainer, CreateContainer, Login, Footer, SignUp } from "./components";
+import { Nav, MainContainer, CreateContainer, Login, Footer, SignUp, SummaryView } from "./components";
 import { getAllItems } from "./utils/firebaseFunctions";
 import { actionTypes } from "./components/context/reducer";
 import { UseStateValue } from "./components/context/StateProvider";
 
+
 const App = () => {
   const [{items}, dispatch] = UseStateValue();
+  
 
   const fetchData = async () => {
     await getAllItems().then((data) => {
@@ -33,6 +35,7 @@ const App = () => {
             <Route path="/createitem" element={<CreateContainer />} />
             <Route path="/login" element={<Login/>} />
             <Route path="/signup" element={<SignUp/>}/>
+            <Route path="/summaryview" element={<SummaryView/>} />
           </Routes>
         </main>
         <Footer />
