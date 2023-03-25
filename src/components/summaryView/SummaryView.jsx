@@ -86,7 +86,7 @@ const SummaryView = () => {
         {/* User */}
 
         <div>
-          <caption className="flex  j  text-green-600 text-[1rem] lg:text-[2rem] bg-green-100 ">
+          <caption className="flex  item-center justify-center  text-green-600 text-[1rem] lg:text-[2rem] bg-green-100 ">
             User
           </caption>
           <table className="w-full text-sm text-left text-green-100 dark:text-green-100">
