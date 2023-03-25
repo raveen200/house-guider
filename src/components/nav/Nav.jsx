@@ -13,6 +13,7 @@ import UserDp from "../assets/images/avatar-man.png";
 import { actionTypes } from "../context/reducer";
 import { UseStateValue } from "../context/StateProvider";
 import { getAllUsers, saveUser } from "../../utils/firebaseFunctions";
+import { render } from "@testing-library/react";
 
 export const Nav = () => {
   const firebaseAuth = getAuth(app);
@@ -30,29 +31,23 @@ export const Nav = () => {
       dispatch({
         type: actionTypes.SET_USER,
         user: providerData[0],
-       
       });
-    
+
       localStorage.setItem("user", JSON.stringify(providerData[0]));
     } else {
       setIsMenu(!isMenu);
     }
   };
 
-if (user) {
-    const udata ={
-        id: `${user.uid}`,
-        name: user.displayName,
-        email: user.email,
-        photo: user.photoURL,
-        uid: user.uid,
-    
-    
-      };
-      saveUser(udata);
-    }
-
- 
+  if (user) {
+    const udata = {
+      name: user.displayName,
+      email: user.email,
+      photo: user.photoURL,
+      uid: user.uid,
+    };
+    saveUser(udata);
+  }
 
   const logout = () => {
     setIsMenu(false);
@@ -83,15 +78,26 @@ if (user) {
             <li classname="text-base text-textColor hover:text-headingColor  cursor-pointer">
               <Link to={"/"}>Home</Link>
             </li>
-            <li classname="text-base text-textColor hover:text-headingColor  cursor-pointer">
+            {/* <li classname="text-base text-textColor hover:text-headingColor  cursor-pointer">
               Menu
-            </li>
-            <li classname="text-base text-textColor hover:text-headingColor  cursor-pointer">
+            </li> */}
+            {/* <li classname="text-base text-textColor hover:text-headingColor  cursor-pointer">
               <Link to={"/"}>About Us</Link>
-            </li>
-            <li classname="text-base text-textColor bg-black hover:text-headingColor  cursor-pointer">
-              <Link to={"/login"}>Sign in</Link>
-            </li>
+            </li> */}
+
+           {!user && (
+
+          
+
+           
+              <li classname="text-base text-textColor bg-black hover:text-headingColor  cursor-pointer">
+                <Link to={"/login"}>Sign in</Link>
+              </li>
+               )
+}
+           
+              
+        
           </motion.ul>
 
           {/* <div className="relative flex items-center justify-center">

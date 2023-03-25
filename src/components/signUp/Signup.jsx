@@ -7,6 +7,8 @@ import {
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { motion } from "framer-motion";
+import { UseStateValue } from "../context/StateProvider";
+import { actionTypes } from "../context/reducer";
 
 const firebaseAuth = getAuth();
 
@@ -27,6 +29,18 @@ const defaultFormFeild = {
 const Signup = () => {
   const [formFeild, setFormFeild] = useState(defaultFormFeild);
   const { userName, email, password, confirmPassword } = formFeild;
+  const [,dispatch]= UseStateValue();
+
+
+  
+  function setUserdta(udata) {
+
+    dispatch({
+      type: actionTypes.SET_USER,
+      user:udata,
+     
+    });
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,10 +55,22 @@ const Signup = () => {
         email,
         password
       );
+      setUserdta({email,displayName:userName})
+      
     } catch (error) {
       console.log("user Creation an Error", error);
     }
   };
+
+
+
+  //localStorage.setItem("user", JSON.stringify([[]]));
+
+
+
+
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;

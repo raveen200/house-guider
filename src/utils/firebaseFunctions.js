@@ -35,7 +35,7 @@ export const getAllItems = async () => {
 //getAllUsers
 export const getAllUsers = async () => {
   const users = await getDocs(
-    query(collection(firestore, "Users"), orderBy("UID", "desc"))
+    query(collection(firestore, "Users"), orderBy("uid", "desc"))
   );
 
   return users.docs.map((doc) => doc.data());

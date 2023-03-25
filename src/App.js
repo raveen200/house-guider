@@ -2,13 +2,15 @@ import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { Nav, MainContainer, CreateContainer, Login, Footer, SignUp, SummaryView } from "./components";
-import { getAllItems } from "./utils/firebaseFunctions";
+import { getAllItems, getAllUsers } from "./utils/firebaseFunctions";
 import { actionTypes } from "./components/context/reducer";
 import { UseStateValue } from "./components/context/StateProvider";
 
 
 const App = () => {
-  const [{items}, dispatch] = UseStateValue();
+
+  const [, dispatch] = UseStateValue();
+ 
   
 
   const fetchData = async () => {
@@ -23,6 +25,21 @@ const App = () => {
       useEffect(() => {
           fetchData();  
         }, []);
+
+const fetchUser = async () => {
+  await getAllUsers().then((data) => {
+    dispatch({
+      type: actionTypes.SET_USERS,
+      users: data,
+    });
+  });
+};
+
+    useEffect(() => {
+        fetchUser();
+      }, []);
+
+
   
 
   return (
