@@ -89,7 +89,7 @@ export const Nav = () => {
           
 
            
-              <li className="text-base text-textColor bg-black hover:text-headingColor  cursor-pointer">
+              <li className="text-base text-textColor hover:text-headingColor  cursor-pointer">
                 <Link to={"/login"}>Sign in</Link>
               </li>
                )
