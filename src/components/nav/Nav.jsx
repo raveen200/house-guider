@@ -13,7 +13,6 @@ import UserDp from "../assets/images/avatar-man.png";
 import { actionTypes } from "../context/reducer";
 import { UseStateValue } from "../context/StateProvider";
 import { getAllUsers, saveUser } from "../../utils/firebaseFunctions";
-import { render } from "@testing-library/react";
 
 export const Nav = () => {
   const firebaseAuth = getAuth(app);
@@ -75,13 +74,13 @@ export const Nav = () => {
             exit={{ opacity: 0, x: 200 }}
             className="flex items-center gap-12"
           >
-            <li classname="text-base text-textColor hover:text-headingColor  cursor-pointer">
+            <li className="text-base text-textColor hover:text-headingColor  cursor-pointer">
               <Link to={"/"}>Home</Link>
             </li>
-            {/* <li classname="text-base text-textColor hover:text-headingColor  cursor-pointer">
+            {/* <li className="text-base text-textColor hover:text-headingColor  cursor-pointer">
               Menu
             </li> */}
-            {/* <li classname="text-base text-textColor hover:text-headingColor  cursor-pointer">
+            {/* <li className="text-base text-textColor hover:text-headingColor  cursor-pointer">
               <Link to={"/"}>About Us</Link>
             </li> */}
 
@@ -90,7 +89,7 @@ export const Nav = () => {
           
 
            
-              <li classname="text-base text-textColor bg-black hover:text-headingColor  cursor-pointer">
+              <li className="text-base text-textColor bg-black hover:text-headingColor  cursor-pointer">
                 <Link to={"/login"}>Sign in</Link>
               </li>
                )
@@ -209,28 +208,28 @@ export const Nav = () => {
               )}
               <ul className="flex flex-col px-4 py-2  gap-3 ml-auto ">
                 <li
-                  classname="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out 
+                  className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out 
                   hover:bg-slate-100 px-4 py-2"
                   onClick={() => setIsMenu(false)}
                 >
                   Home
                 </li>
                 <li
-                  classname="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out 
+                  className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out 
                   hover:bg-slate-100 px-4 py-2"
                   onClick={() => setIsMenu(false)}
                 >
                   Menu
                 </li>
                 <li
-                  classname="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out 
+                  className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out 
                   hover:bg-slate-100 px-4 py-2"
                   onClick={() => setIsMenu(false)}
                 >
                   About Us
                 </li>
                 <li
-                  classname="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out 
+                  className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out 
                   hover:bg-slate-100 px-4 py-2"
                   onClick={() => setIsMenu(false)}
                 >
