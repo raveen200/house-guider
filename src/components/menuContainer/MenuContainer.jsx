@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BsHouseAddFill } from "react-icons/bs";
 import { provinces } from "../../utils/data";
 import { motion } from "framer-motion";
-import RowContainer from "../rowContainer/RowContainer";
+import RowContainer from "../rowContainer";
 import { UseStateValue } from "../context/StateProvider";
 
 const MenuContainer = () => {
