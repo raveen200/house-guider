@@ -69,17 +69,11 @@ const SummaryView = () => {
                       <td className="px-6 py-4">{item?.location}</td>
                       <td className="px-6 py-4">${item?.price}</td>
                       <td className="px-6 py-4">
-                        <div className="flex  items-center gap-3">
-                          <div className="font-medium text-white  hover:text-yellow-300 cursor-pointer">
-                            Edit
-                          </div>
-
-                          <div
-                            className="font-medium text-white  hover:text-red-500 cursor-pointer"
-                            onClick={() => deteteDocument(item.id)}
-                          >
-                            Delete
-                          </div>
+                        <div
+                          className="font-medium text-white  hover:text-red-500 cursor-pointer"
+                          onClick={() => deteteDocument(item.id)}
+                        >
+                          Delete
                         </div>
                       </td>
                     </tr>
@@ -113,10 +107,6 @@ const SummaryView = () => {
                   <th scope="col" className="px-6 py-3">
                     Profile Picture
                   </th>
-                  <th scope="col" className="px-6 py-3">
-                    profile ID
-                  </th>
-                 
                 </tr>
               </thead>
               <tbody>
@@ -133,17 +123,13 @@ const SummaryView = () => {
                         {user?.name}
                       </th>
                       <td className="px-6 py-4">{user?.email}</td>
-                      <td
-                        className="px-4 py-4 " 
-                      >
+                      <td className="px-4 py-4 ">
                         <img
                           src={user?.photo}
                           alt="Dp"
                           className="w-6 h-6 rounded-md "
                         />
                       </td>
-                      <td className="px-6 py-4">{user?.uid}</td>
-                    
                     </tr>
                   ))
                 ) : (
