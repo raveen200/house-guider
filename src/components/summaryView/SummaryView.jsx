@@ -1,20 +1,29 @@
 import React from "react";
 import { UseStateValue } from "../context/StateProvider";
-import { doc, updateDoc, deleteField, deleteDoc } from "firebase/firestore";
-import { firestore } from "../../firebase.config";
+import { deleteItem } from "../../utils/firebaseFunctions";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const SummaryView = () => {
   const [{ items, users }] = UseStateValue();
-  const data = items;
+  const [data, setData] = useState([]);
+  ///const data = items;
+  useEffect(() => {
+    setData(items);
+  }, [items]);
+
   const userdata = users;
+  console.log(`data`, data);
 
-  const deleteHandler = (id) => {
-  doc(firestore, "items", id).deleteDoc().await();
-   
-    
+  const deteteDocument = async (id) => {
+    console.log(`id`, id);
+    await deleteItem(id);
+    console.log(`data`, data.length);
+
+    const aData = data.filter((item) => item.id !== id);
+    setData(aData);
+    console.log(`data`, data.length);
   };
-
-  // console.log(userdata);
 
   return (
     <section className="h-screen">
@@ -43,9 +52,9 @@ const SummaryView = () => {
                   <th scope="col" className="px-6 py-3"></th>
                 </tr>
               </thead>
-              {data && data.length > 0 ? (
-                data.map((item) => (
-                  <tbody>
+              <tbody>
+                {data && data.length ? (
+                  data.map((item) => (
                     <tr
                       key={item.id}
                       className="bg-green-600 border-b border-green-400 hover:bg-green-500"
@@ -67,20 +76,20 @@ const SummaryView = () => {
 
                           <div
                             className="font-medium text-white  hover:text-red-500 cursor-pointer"
-                            onClick={() => deleteHandler(item.id)}
+                            onClick={() => deteteDocument(item.id)}
                           >
                             Delete
                           </div>
                         </div>
                       </td>
                     </tr>
-                  </tbody>
-                ))
-              ) : (
-                <div className="w-full  flex flex-col  items-center justify-center">
-                  <h1 className="text-2xl text-green-600">No Data Found</h1>
-                </div>
-              )}
+                  ))
+                ) : (
+                  <div className="w-full  flex flex-col  items-center justify-center">
+                    <h1 className="text-2xl text-green-600">No Data Found</h1>
+                  </div>
+                )}
+              </tbody>
             </table>
           </div>
         </div>
@@ -88,63 +97,63 @@ const SummaryView = () => {
         {/* User */}
 
         <div>
-          <caption className="flex  item-center justify-center  text-green-600 text-[1rem] lg:text-[2rem] bg-green-100 ">
-            User
-          </caption>
-          <table className="w-full text-sm text-left text-green-100 dark:text-green-100">
-            <thead className="text-xs text-green uppercase bg-green-600 border-b border-green-400 dark:text-green">
-              <tr>
-                <th scope="col" className="px-6 py-3">
-                  User Name
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Email
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Profile Picture
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  profile Create Date
-                </th>
-                <th scope="col" className="px-6 py-3"></th>
-              </tr>
-            </thead>
-            {userdata && userdata.length > 0 ? (
-              userdata.map((user) => (
-                <tbody>
-                  <tr className="bg-green-600 border-b border-green-400 hover:bg-green-500">
-                    <th
-                      scope="row"
-                      className="px-6 py-4 font-medium text-green-50 whitespace-nowrap dark:text-green-100"
+          <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <caption className="flex  item-center justify-center  text-green-600 text-[1rem] lg:text-[2rem] bg-green-100 ">
+              Users
+            </caption>
+            <table className="w-full text-sm text-left text-green-100 dark:text-green-100">
+              <thead className="text-xs text-green uppercase bg-green-600 border-b border-green-400 dark:text-green">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    User Name
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Email
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Profile Picture
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    profile ID
+                  </th>
+                 
+                </tr>
+              </thead>
+              <tbody>
+                {userdata && userdata.length > 0 ? (
+                  userdata.map((user) => (
+                    <tr
+                      key={user.id}
+                      className="bg-green-600 border-b border-green-400 hover:bg-green-500"
                     >
-                      {user?.name}
-                    </th>
-                    <td className="px-6 py-4">{user?.email}</td>
-                    <td className="px-6 py-4">
-                      <img
-                        src={user?.photo}
-                        alt="Dp"
-                        className="w-4 h-4 rounded-md "
-                      />
-                    </td>
-                    <td className="px-6 py-4">{user?.uid}</td>
-                    <td className="px-6 py-4">
-                      <a
-                        href="#"
-                        className="font-medium text-white hover:underline"
+                      <th
+                        scope="row"
+                        className="px-6 py-4 font-medium text-green-50 whitespace-nowrap dark:text-green-100"
                       >
-                        Edit
-                      </a>
-                    </td>
-                  </tr>
-                </tbody>
-              ))
-            ) : (
-              <div className="w-full  flex flex-col  items-center justify-center">
-                <h1 className="text-2xl text-green-600">No Data Found</h1>
-              </div>
-            )}
-          </table>
+                        {user?.name}
+                      </th>
+                      <td className="px-6 py-4">{user?.email}</td>
+                      <td
+                        className="px-4 py-4 " 
+                      >
+                        <img
+                          src={user?.photo}
+                          alt="Dp"
+                          className="w-6 h-6 rounded-md "
+                        />
+                      </td>
+                      <td className="px-6 py-4">{user?.uid}</td>
+                    
+                    </tr>
+                  ))
+                ) : (
+                  <div className="w-full  flex flex-col  items-center justify-center">
+                    <h1 className="text-2xl text-green-600">No Data Found</h1>
+                  </div>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </section>

@@ -74,9 +74,9 @@ export const Nav = () => {
             exit={{ opacity: 0, x: 200 }}
             className="flex items-center gap-12"
           >
-            <li className="text-base text-textColor hover:text-headingColor  cursor-pointer">
+            {/* <li className="text-base text-textColor hover:text-headingColor  cursor-pointer">
               <Link to={"/"}>Home</Link>
-            </li>
+            </li> */}
             {/* <li className="text-base text-textColor hover:text-headingColor  cursor-pointer">
               Menu
             </li> */}
@@ -116,9 +116,9 @@ export const Nav = () => {
                 onClick={login}
               />
             </div>
-            <div className="font-semibold opacity-50">
+            {/* <div className="font-semibold opacity-50">
               {user ? user.displayName : ""}
-            </div>
+            </div> */}
 
             {isMenu && (
               <motion.div

@@ -5,21 +5,37 @@ import {
   orderBy,
   query,
   setDoc,
+  deleteDoc
 } from "firebase/firestore";
 import { firestore } from "../firebase.config";
 
 // Saving new Item and updating existing item
 export const saveItem = async (data) => {
-  await setDoc(doc(firestore, "Items", `${Date.now()}`), data, {
+  await setDoc(doc(firestore, "Items", data.title), data, {
     merge: true,
   });
 };
+
+// updateItem 
+export const updateItem = async (data) => {
+  await setDoc(doc(firestore, "Items", data.id), data, {
+    merge: true,
+  });
+};
+
 
 // Saving new User and updating existing user data
 export const saveUser = async (udata) => {
   await setDoc(doc(firestore, "Users", udata.uid), udata, {
     merge: true,
   });
+};
+
+
+
+// Deleting Item
+export const deleteItem = async (id) => {
+  return await deleteDoc(doc(firestore, "Items", id));
 };
 
 // getAll items
