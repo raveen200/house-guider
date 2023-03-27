@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
+// import { useHistory } from 'react-router-dom';
 import Logo from "../assets/images/logoA.png";
 import { MdLocationOn, MdAdd, MdLogout } from "react-icons/md";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -55,6 +56,8 @@ export const Nav = () => {
       type: actionTypes.SET_USER,
       user: null,
     });
+    // const history = useHistory();
+    // history.push('/');
   };
 
   //  console.log(user);
@@ -214,7 +217,7 @@ export const Nav = () => {
                 >
                   Home
                 </li>
-                <li
+                {/* <li
                   className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out 
                   hover:bg-slate-100 px-4 py-2"
                   onClick={() => setIsMenu(false)}
@@ -234,7 +237,7 @@ export const Nav = () => {
                   onClick={() => setIsMenu(false)}
                 >
                   Service
-                </li>
+                </li> */}
               </ul>
 
               <p
