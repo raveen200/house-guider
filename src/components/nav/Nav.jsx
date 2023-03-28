@@ -22,6 +22,11 @@ export const Nav = () => {
   const [{ user }, dispatch] = UseStateValue();
 
   const [isMenu, setIsMenu] = useState(false);
+  const [validEmails, setValidEmails] = useState([
+    "raveensamudika@gmail.com",
+    "codiepredators@gmail.com",
+    "amithb777@gmail.com",
+  ]);
 
   const login = async () => {
     if (!user) {
@@ -87,19 +92,11 @@ export const Nav = () => {
               <Link to={"/"}>About Us</Link>
             </li> */}
 
-           {!user && (
-
-          
-
-           
+            {!user && (
               <li className="text-base text-textColor hover:text-headingColor  cursor-pointer">
                 <Link to={"/login"}>Sign in</Link>
               </li>
-               )
-}
-           
-              
-        
+            )}
           </motion.ul>
 
           {/* <div className="relative flex items-center justify-center">
@@ -130,7 +127,7 @@ export const Nav = () => {
                 exit={{ opacity: 0, scale: 0.6 }}
                 className="w-40 bg-gray-50 shadow-xl rounded-xl flex-col absolute top-11 right-0 "
               >
-                {user && user.email === "raveensamudika@gmail.com" && (
+                {user && validEmails.includes(user.email) && (
                   <Link to={"/createitem"}>
                     <p
                       className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out
@@ -141,7 +138,7 @@ export const Nav = () => {
                     </p>
                   </Link>
                 )}
-                {user && user.email === "raveensamudika@gmail.com" && (
+                {user && validEmails.includes(user.email) && (
                   <Link to={"/summaryview"}>
                     <p
                       className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out
