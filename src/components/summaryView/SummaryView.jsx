@@ -26,7 +26,7 @@ const SummaryView = () => {
   };
 
   return (
-    <section className="h-screen">
+   
       <div className="flex  justify-between px-1 py-24 gap-2 flex-wrap ">
         {/* Houses  */}
         <div className="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
@@ -142,7 +142,7 @@ const SummaryView = () => {
           </div>
         </div>
       </div>
-    </section>
+ 
   );
 };
 
