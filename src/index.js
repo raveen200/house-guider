@@ -9,7 +9,7 @@ import reducer from "./components/context/reducer";
 
 ReactDOM.render(
   <Router>
-    <StateProvider initialState={inistialState} reducer= {reducer}>
+    <StateProvider initialState={inistialState} reducer={reducer}>
       <App />
     </StateProvider>
   </Router>,
