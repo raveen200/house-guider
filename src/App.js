@@ -9,6 +9,7 @@ import {
   Footer,
   SignUp,
   SummaryView,
+  BookNow,
 } from "./components";
 import { getAllItems, getAllUsers } from "./utils/firebaseFunctions";
 import { actionTypes } from "./components/context/reducer";
@@ -54,6 +55,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/summaryview" element={<SummaryView />} />
+            <Route path="/booknow" element = {<BookNow />} />
           </Routes>
         </main>
         <Footer />
