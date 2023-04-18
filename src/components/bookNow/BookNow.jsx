@@ -27,7 +27,7 @@ const BookNow = (props) => {
     setFilter(e.target.value);
   };
 
-  console.log(filter);
+  //console.log(filter);
 
   const saveDetails = () => {
     const resvervationDetails = {
@@ -119,7 +119,7 @@ const BookNow = (props) => {
                 items
                   .filter((item) => item.province === filter)
                   .map((item) => (
-                    <option key={item.id} value={item.title}>
+                    <option key={item.id} value={item.value}>
                       {item.title}
                     </option>
                   ))}
