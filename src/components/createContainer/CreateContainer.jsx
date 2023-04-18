@@ -45,7 +45,7 @@ const CreateContainer = () => {
       (error) => {
         console.log(error);
         setFields(true);
-        setMsg("Error while uploading : Try AGain 🙇");
+        setMsg("Error while uploading : Try AGain ");
         setAlertStatus("danger");
         setTimeout(() => {
           setFields(false);

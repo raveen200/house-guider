@@ -5,6 +5,7 @@ import { useState } from "react";
 import { saveReservation } from "../../utils/firebaseFunctions";
 import { motion } from "framer-motion";
 
+
 const BookNow = (props) => {
   const [{ items, user }, dispatch] = UseStateValue();
   const [filter, setFilter] = useState("");
@@ -15,6 +16,9 @@ const BookNow = (props) => {
   const [checkInDate, setCheckInDate] = useState("");
   const [checkOutDate, setCheckOutDate] = useState("");
   const [specialRequests, setSpecialRequests] = useState("");
+  const [msg, setMsg] = useState(null);
+  const [fields, setFields] = useState(false);
+  const [alertStatus, setAlertStatus] = useState("danger");
 
   //console.log(user);
 
@@ -41,12 +45,35 @@ const BookNow = (props) => {
       userAccountName: user.displayName,
     };
     console.log(resvervationDetails);
-
     saveReservation(resvervationDetails);
+    setFields(true);
+    setMsg("Reservation saved successfully");
+    setAlertStatus("success");
+    setTimeout(() => {
+      setFields(false);
+    }
+    , 4000);
+
+    
   };
 
   return (
+    
     <div>
+       {fields && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className={`w-full p-2 rounded-lg text-center text-lg font-semibold ${
+              alertStatus === "danger"
+                ? "bg-red-400 text-red-800"
+                : "bg-emerald-400 text-emerald-800"
+            }`}
+          >
+            {msg}
+          </motion.p>
+        )}
       <div className="flex flex-col text-lg gap-2 mb-4 text-green-900 font-bold items-center justify-center  m-4">
         Reservation
       </div>
