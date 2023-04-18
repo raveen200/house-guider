@@ -110,6 +110,7 @@ export const Nav = () => {
             <div className="flex justify-center">
               <motion.img
                 whileTap={{ scale: 0.6 }}
+      
                 src={user ? user.photoURL : UserDp}
                 className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-md rounded-full object-cover "
                 alt="userDp"

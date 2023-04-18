@@ -3,10 +3,11 @@ import { provinces } from "../../utils/data";
 import { UseStateValue } from "../context/StateProvider";
 import { useState } from "react";
 import { saveReservation } from "../../utils/firebaseFunctions";
+import { motion } from "framer-motion";
 
-const BookNow = () => {
-  const [{ items }, dispatch] = UseStateValue();
-  const [filter, setFilter] = useState("Central Province");
+const BookNow = (props) => {
+  const [{ items, user }, dispatch] = UseStateValue();
+  const [filter, setFilter] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [numberOfGuests, setNumberOfGuests] = useState("");
@@ -15,61 +16,34 @@ const BookNow = () => {
   const [checkOutDate, setCheckOutDate] = useState("");
   const [specialRequests, setSpecialRequests] = useState("");
 
+  //console.log(user);
 
-
-
-
-
- console.log(items);
+  //console.log(items);
 
   const handleProvinceChange = (e) => {
     setFilter(e.target.value);
   };
 
   console.log(filter);
-  
 
   const saveDetails = () => {
     const resvervationDetails = {
       id: `${Date.now()}`,
-      firstName : firstName,
-      lastName : lastName,
-      numberOfGuests : numberOfGuests,
-      hotel : hotel,
-      checkInDate : checkInDate,
-      checkOutDate : checkOutDate,
-      province : filter,
-      requests : specialRequests,
-
+      firstName: firstName,
+      lastName: lastName,
+      numberOfGuests: numberOfGuests,
+      hotel: hotel,
+      checkInDate: checkInDate,
+      checkOutDate: checkOutDate,
+      province: filter,
+      requests: specialRequests,
+      userAccountEmail: user.email,
+      userAccountName: user.displayName,
     };
     console.log(resvervationDetails);
 
     saveReservation(resvervationDetails);
-
-
-    
-
-
-
-
-
-
-
-   
-
-
-    
-
-
-  }
-
-
-
-
-
-  
-
-
+  };
 
   return (
     <div>
@@ -107,27 +81,16 @@ const BookNow = () => {
         </div>
         <div className="flex justify-center gap-4">
           <div>
-            <select 
-            value={filter}
-            onChange={handleProvinceChange}
-           
-            
-            >
+            <select value={filter} onChange={handleProvinceChange}>
               {provinces.map((province) => (
                 <option key={province.id} value={province.urlParamName}>
                   {province.name}
-                    
                 </option>
-              
               ))}
             </select>
           </div>
           <div>
-            
-            <select
-            value={hotel}
-            onChange={(e) => setHotel(e.target.value)}
-            >
+            <select value={hotel} onChange={(e) => setHotel(e.target.value)}>
               {items &&
                 items
                   .filter((item) => item.province === filter)
@@ -195,18 +158,16 @@ const BookNow = () => {
           </div>
         </div>
         <div className="flex justify-center m-6">
-          <button
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}     
             type="button"
             className=" border-none outline-none bg-emerald-500 px-12 py-2 rounded-lg text-lg text-white font-semibold"
             onClick={saveDetails}
           >
             Reserve
-          </button>
+          </motion.button>
         </div>
-
-
-
-
       </form>
     </div>
   );

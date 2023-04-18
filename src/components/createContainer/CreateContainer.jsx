@@ -271,14 +271,16 @@ const CreateContainer = () => {
           </div>
         </div>
 
-        <div className="flex items-center w-full ">
-          <button
+        <div className="flex justify-center w-full ">
+          <motion.button
+           whileHover={{ scale: 1.1 }}
+           whileTap={{ scale: 0.9 }}   
             type="button"
-            className="ml-0 md:ml-auto  w-full md:w-auto border-none outline-none bg-emerald-500 px-12 py-2 rounded-lg text-lg text-white font-semibold"
+            className="border-none outline-none bg-emerald-500 px-12 py-2 rounded-lg text-lg text-white font-semibold"
             onClick={saveDetails}
           >
             Save
-          </button>
+          </motion.button>
         </div>
       </div>
     </div>
