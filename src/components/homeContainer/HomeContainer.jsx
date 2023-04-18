@@ -8,7 +8,7 @@ import { UseStateValue } from "../context/StateProvider";
 const HomeContainer = () => {
   const [{ user }, dispatch] = UseStateValue();
 
-  console.log(user);
+ // console.log(user);
   return (
     <section
       className="grid grid-cols-1 gap-2 md:grid-cols-2 w-full  "

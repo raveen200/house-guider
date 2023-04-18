@@ -30,9 +30,7 @@ const SummaryView = () => {
     <div>
       <div className="flex items-center justify-center mt-4">
         <button className="bg-green-600 text-white px-4 py-2 rounded-md cursor-pointer">
-         <Link to={"/bookingView"}>
-          Resrvations
-          </Link>
+          <Link to={"/bookingView"}>Resrvations</Link>
         </button>
       </div>
 

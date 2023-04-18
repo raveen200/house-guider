@@ -55,7 +55,7 @@ const BookingView = () => {
                 reservationData.map((reservation) => (
                   <tr
                     key={reservation.id}
-                    className="bg-green-600 border-b border-green-400 hover:bg-green-500"
+                    className="bg-green-600 border-b  border-green-400 hover:bg-green-500"
                   >
                     <th
                       scope="row"
@@ -63,10 +63,14 @@ const BookingView = () => {
                     >
                       {reservation?.firstName}
                     </th>
-                    <td className="px-6 py-4">{reservation?.userAccountEmail}</td>
+                    <td className="px-6 py-4">
+                      {reservation?.userAccountEmail}
+                    </td>
                     <td className="px-4 py-4 ">{reservation?.province}</td>
                     <td className="px-4 py-4 ">{reservation?.hotel}</td>
-                    <td className="px-4 py-4 ">{reservation?.numberOfGuests}</td>
+                    <td className="px-4 py-4 text-center">
+                      {reservation?.numberOfGuests}
+                    </td>
                     <td className="px-4 py-4 ">{reservation?.checkInDate}</td>
                     <td className="px-4 py-4 ">{reservation?.checkOutDate}</td>
                     <td className="px-4 py-4 ">{reservation?.requests}</td>
