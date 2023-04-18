@@ -5,7 +5,6 @@ import { useState } from "react";
 import { saveReservation } from "../../utils/firebaseFunctions";
 import { motion } from "framer-motion";
 
-
 const BookNow = (props) => {
   const [{ items, user }, dispatch] = UseStateValue();
   const [filter, setFilter] = useState("");
@@ -51,29 +50,25 @@ const BookNow = (props) => {
     setAlertStatus("success");
     setTimeout(() => {
       setFields(false);
-    }
-    , 4000);
-
-    
+    }, 4000);
   };
 
   return (
-    
     <div>
-       {fields && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className={`w-full p-2 rounded-lg text-center text-lg font-semibold ${
-              alertStatus === "danger"
-                ? "bg-red-400 text-red-800"
-                : "bg-emerald-400 text-emerald-800"
-            }`}
-          >
-            {msg}
-          </motion.p>
-        )}
+      {fields && (
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className={`w-full p-2 rounded-lg text-center text-lg font-semibold ${
+            alertStatus === "danger"
+              ? "bg-red-400 text-red-800"
+              : "bg-emerald-400 text-emerald-800"
+          }`}
+        >
+          {msg}
+        </motion.p>
+      )}
       <div className="flex flex-col text-lg gap-2 mb-4 text-green-900 font-bold items-center justify-center  m-4">
         Reservation
       </div>
@@ -107,7 +102,8 @@ const BookNow = (props) => {
           </div>
         </div>
         <div className="flex justify-center gap-4">
-          <div>
+          <div className=" flex items-center text-base gap-4">
+            <p>Province</p>
             <select value={filter} onChange={handleProvinceChange}>
               {provinces.map((province) => (
                 <option key={province.id} value={province.urlParamName}>
@@ -116,7 +112,8 @@ const BookNow = (props) => {
               ))}
             </select>
           </div>
-          <div>
+          <div className="flex items-center text-base gap-4">
+            <p>Gust House</p>
             <select value={hotel} onChange={(e) => setHotel(e.target.value)}>
               {items &&
                 items
@@ -187,7 +184,7 @@ const BookNow = (props) => {
         <div className="flex justify-center m-6">
           <motion.button
             whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}     
+            whileTap={{ scale: 0.9 }}
             type="button"
             className=" border-none outline-none bg-emerald-500 px-12 py-2 rounded-lg text-lg text-white font-semibold"
             onClick={saveDetails}
