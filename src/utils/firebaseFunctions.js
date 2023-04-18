@@ -56,6 +56,15 @@ export const getAllItems = async () => {
   return items.docs.map((doc) => doc.data());
 };
 
+// getAllReservations
+export const getAllReservations = async () => {
+  const reservations = await getDocs(
+    query(collection(firestore, "Reservations"), orderBy("id", "desc"))
+  );
+
+  return reservations.docs.map((doc) => doc.data());
+};
+
 
 //getAllUsers
 export const getAllUsers = async () => {

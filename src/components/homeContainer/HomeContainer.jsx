@@ -2,8 +2,13 @@ import React from "react";
 import GreenBG from "../assets/images/BG.png";
 import Girl from "../assets/images/Girl.png";
 import { Link } from "react-router-dom";
+import { UseStateValue } from "../context/StateProvider";
+
 
 const HomeContainer = () => {
+  const [{ user }, dispatch] = UseStateValue();
+
+  console.log(user);
   return (
     <section
       className="grid grid-cols-1 gap-2 md:grid-cols-2 w-full  "
@@ -28,7 +33,15 @@ const HomeContainer = () => {
             className="bg-gradient-to-br from-green-400 to-green-500 w-full md:w-auto px-4 py-2 
            rounded-xl hover:shadow-lg transition-all ease-in-out duration-100"
           >
-           <Link to={"/booknow"}> Book Now </Link>
+            
+            {user ? (
+              <Link to={"/booknow"}> Book Now </Link>
+            ) : (
+              <Link to={"/login"}> Book Now </Link>
+            )
+              }
+
+           {/* <Link to={"/booknow"}> Book Now </Link> */}
           </p>
         
       </div>

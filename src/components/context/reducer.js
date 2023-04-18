@@ -2,6 +2,7 @@ export const actionTypes = {
   SET_USER: "SET_USER",
   SET_ITEMS: "SET_ITEMS",
   SET_USERS: "SET_USERS",
+  SET_RESERVATIONS: "SET_RESERVATIONS",
 };
 
 const reducer = (state, action) => {
@@ -22,6 +23,12 @@ const reducer = (state, action) => {
         ...state,
         users: action.users,
       };
+    case actionTypes.SET_RESERVATIONS:
+      return {
+        ...state,
+        reservations: action.reservations,
+      };
+
 
     default:
       return state;

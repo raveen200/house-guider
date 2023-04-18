@@ -10,4 +10,6 @@ export { default as Login } from "../components/login/Login";
 export { default as SignUp } from "../components/signUp/Signup";
 export { default as SummaryView } from "../components/summaryView/SummaryView";
 export { default as BookNow} from "../components/bookNow/BookNow";
+export { default as BookingView} from "../components/bookingView/BookingView";
+
 

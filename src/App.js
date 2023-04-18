@@ -10,8 +10,9 @@ import {
   SignUp,
   SummaryView,
   BookNow,
+  BookingView,
 } from "./components";
-import { getAllItems, getAllUsers } from "./utils/firebaseFunctions";
+import { getAllItems, getAllReservations, getAllUsers } from "./utils/firebaseFunctions";
 import { actionTypes } from "./components/context/reducer";
 import { UseStateValue } from "./components/context/StateProvider";
 
@@ -44,6 +45,23 @@ const App = () => {
     fetchUser();
   }, []);
 
+const fetchReservations = async () => {
+    await getAllReservations().then((data) => {
+      dispatch({
+        type: actionTypes.SET_RESERVATIONS,
+        reservations: data,
+      });
+    });
+  };
+
+  useEffect(() => {
+    fetchReservations();
+  }, []);
+
+
+
+
+
   return (
     <AnimatePresence>
       <div className="w-screen h-auto flex flex-col bg-primary">
@@ -56,6 +74,7 @@ const App = () => {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/summaryview" element={<SummaryView />} />
             <Route path="/booknow" element = {<BookNow />} />
+            <Route path="/bookingView" element = {<BookingView />} />
           </Routes>
         </main>
         <Footer />

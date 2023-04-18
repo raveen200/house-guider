@@ -3,6 +3,7 @@ import { UseStateValue } from "../context/StateProvider";
 import { deleteItem } from "../../utils/firebaseFunctions";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const SummaryView = () => {
   const [{ items, users }] = UseStateValue();
@@ -26,8 +27,16 @@ const SummaryView = () => {
   };
 
   return (
-   
-      <div className="flex  justify-between px-1 py-24 gap-2 flex-wrap ">
+    <div>
+      <div className="flex items-center justify-center mt-4">
+        <button className="bg-green-600 text-white px-4 py-2 rounded-md cursor-pointer">
+         <Link to={"/bookingView"}>
+          Resrvations
+          </Link>
+        </button>
+      </div>
+
+      <div className="flex  justify-between px-1 py-8 gap-2 flex-wrap ">
         {/* Houses  */}
         <div className="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -142,7 +151,7 @@ const SummaryView = () => {
           </div>
         </div>
       </div>
- 
+    </div>
   );
 };
 
