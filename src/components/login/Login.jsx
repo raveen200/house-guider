@@ -1,16 +1,17 @@
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import Signup from "../signUp/Signup";
 import { UseStateValue } from "../context/StateProvider";
 import { actionTypes } from "../context/reducer";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { app } from "../../firebase.config";
 
-
 const Login = () => {
   const [{ user }, dispatch] = UseStateValue();
+ 
   const firebaseAuth = getAuth(app);
+
 
   const provider = new GoogleAuthProvider();
   const SignUp = async () => {
@@ -23,6 +24,8 @@ const Login = () => {
     });
 
     localStorage.setItem("user", JSON.stringify(providerData[0]));
+
+    // history.push("/*");
   };
   return (
     <section className="h-screen">
@@ -37,7 +40,7 @@ const Login = () => {
           </div>
 
           <div className="md:w-8/12 lg:ml-6 lg:w-5/12">
-          <div className="flex flex-col text-lg gap-2 mb-4 text-green-900 font-bold items-center justify-center w-full">
+            <div className="flex flex-col text-lg gap-2 mb-4 text-green-900 font-bold items-center justify-center w-full">
               Sign in to your account
             </div>
             <form className="bg-gray-100 rounded-lg px-5 ">
@@ -98,9 +101,7 @@ const Login = () => {
               </div>
 
               <div className="flex text-blue-900 text-base font-semibold  items-center cursor-pointer">
-                 <Link to={"/signup"}>
-                Create account
-                </Link>
+                <Link to={"/signup"}>Create account</Link>
               </div>
             </form>
           </div>
