@@ -2,10 +2,23 @@ import React, { useEffect } from "react";
 import { provinces } from "../../utils/data";
 import { UseStateValue } from "../context/StateProvider";
 import { useState } from "react";
+import { saveReservation } from "../../utils/firebaseFunctions";
 
 const BookNow = () => {
   const [{ items }, dispatch] = UseStateValue();
   const [filter, setFilter] = useState("Central Province");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [numberOfGuests, setNumberOfGuests] = useState("");
+  const [hotel, setHotel] = useState("");
+  const [checkInDate, setCheckInDate] = useState("");
+  const [checkOutDate, setCheckOutDate] = useState("");
+  const [specialRequests, setSpecialRequests] = useState("");
+
+
+
+
+
 
  console.log(items);
 
@@ -16,7 +29,46 @@ const BookNow = () => {
   console.log(filter);
   
 
+  const saveDetails = () => {
+    const resvervationDetails = {
+      id: `${Date.now()}`,
+      firstName : firstName,
+      lastName : lastName,
+      numberOfGuests : numberOfGuests,
+      hotel : hotel,
+      checkInDate : checkInDate,
+      checkOutDate : checkOutDate,
+      province : filter,
+      requests : specialRequests,
+
+    };
+    console.log(resvervationDetails);
+
+    saveReservation(resvervationDetails);
+
+
+    
+
+
+
+
+
+
+
+   
+
+
+    
+
+
+  }
+
+
+
+
+
   
+
 
 
   return (
@@ -34,6 +86,8 @@ const BookNow = () => {
             <input
               required
               name="FirstName"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
               type="text"
               className="text-base font-semibold text-green-800 peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[2.15]"
               placeholder="First Name"
@@ -43,6 +97,8 @@ const BookNow = () => {
             <input
               required
               name="LastName"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
               type="text"
               className="text-base font-semibold text-green-800 peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[2.15]"
               placeholder="Last Name"
@@ -68,12 +124,15 @@ const BookNow = () => {
           </div>
           <div>
             
-            <select>
+            <select
+            value={hotel}
+            onChange={(e) => setHotel(e.target.value)}
+            >
               {items &&
                 items
                   .filter((item) => item.province === filter)
                   .map((item) => (
-                    <option key={item.id} value={item.id}>
+                    <option key={item.id} value={item.title}>
                       {item.title}
                     </option>
                   ))}
@@ -86,7 +145,9 @@ const BookNow = () => {
               <input
                 required
                 name="NumberOfGuests"
+                value={numberOfGuests}
                 type="number"
+                onChange={(e) => setNumberOfGuests(e.target.value)}
                 className="text-base font-semibold text-green-800 peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[2.15]"
                 placeholder="Number Of Guests "
               />
@@ -98,20 +159,24 @@ const BookNow = () => {
           <div className="bg-gray-100 rounded-lg ">
             <input
               required
-              name="NumberOfGuests"
+              name="chaekIn"
+              value={checkInDate}
+              onChange={(e) => setCheckInDate(e.target.value)}
               type="date"
               className="text-base font-semibold text-green-800 peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[2.15]"
-              placeholder="Number Of Guests "
+              placeholder="chack-in"
             />
           </div>
           <p className="text-base">Check-out</p>
           <div className="bg-gray-100 rounded-lg ">
             <input
               required
-              name="NumberOfGuests"
+              name="checkOut"
+              value={checkOutDate}
               type="date"
+              onChange={(e) => setCheckOutDate(e.target.value)}
               className="text-base font-semibold text-green-800 peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[2.15]"
-              placeholder="Number Of Guests "
+              placeholder="chack-out"
             />
           </div>
         </div>
@@ -120,13 +185,28 @@ const BookNow = () => {
           <div className=" items-center text-base h-40 w-1/3 bg-green-100">
             <input
               required
-              name="NumberOfGuests"
+              name="specialRequests"
+              value={specialRequests}
+              onChange={(e) => setSpecialRequests(e.target.value)}
               type="textarea"
               className="text-base font-semibold text-green-800 peer block h-40 w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[2.15]"
               placeholder="Special requests"
             />
           </div>
         </div>
+        <div className="flex justify-center m-6">
+          <button
+            type="button"
+            className=" border-none outline-none bg-emerald-500 px-12 py-2 rounded-lg text-lg text-white font-semibold"
+            onClick={saveDetails}
+          >
+            Reserve
+          </button>
+        </div>
+
+
+
+
       </form>
     </div>
   );

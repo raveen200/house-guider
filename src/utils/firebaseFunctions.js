@@ -16,6 +16,15 @@ export const saveItem = async (data) => {
   });
 };
 
+// save reservations
+export const saveReservation = async (data) => {
+  await setDoc(doc(firestore, "Reservations", data.id), data, {
+    merge: true,
+  });
+};
+
+
+
 // updateItem 
 export const updateItem = async (data) => {
   await setDoc(doc(firestore, "Items", data.id), data, {
@@ -55,4 +64,4 @@ export const getAllUsers = async () => {
   );
 
   return users.docs.map((doc) => doc.data());
-}
+};
