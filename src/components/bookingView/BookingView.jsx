@@ -9,7 +9,7 @@ const BookingView = () => {
   const reservationData = reservations;
 
   return (
-    <div>
+    <div className=" h-screen">
       <div className="flex items-center justify-center m-6">
         <button className="bg-green-600 text-white px-4 py-2 rounded-md cursor-pointer">
           <Link to={"/summaryview"}>Users and Houses</Link>
@@ -61,7 +61,7 @@ const BookingView = () => {
                       scope="row"
                       className="px-6 py-4 font-medium text-green-50 whitespace-nowrap dark:text-green-100"
                     >
-                      {reservation?.userAccountName}
+                      {reservation?.firstName}
                     </th>
                     <td className="px-6 py-4">{reservation?.userAccountEmail}</td>
                     <td className="px-4 py-4 ">{reservation?.province}</td>
