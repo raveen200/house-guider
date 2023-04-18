@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { provinces } from "../../utils/data";
 import { UseStateValue } from "../context/StateProvider";
 import { useState } from "react";
 
 const BookNow = () => {
   const [{ items }, dispatch] = UseStateValue();
+  const [filter, setFilter] = useState("Central Province");
+
+ console.log(items);
+
+  const handleProvinceChange = (e) => {
+    setFilter(e.target.value);
+  };
+
+  console.log(filter);
+  
+
+  
+
 
   return (
     <div>
@@ -38,16 +51,33 @@ const BookNow = () => {
         </div>
         <div className="flex justify-center gap-4">
           <div>
-            <select>
+            <select 
+            value={filter}
+            onChange={handleProvinceChange}
+           
+            
+            >
               {provinces.map((province) => (
-                <option key={province.id} value={province.id}>
+                <option key={province.id} value={province.urlParamName}>
                   {province.name}
+                    
                 </option>
+              
               ))}
             </select>
           </div>
           <div>
-            <select></select>
+            
+            <select>
+              {items &&
+                items
+                  .filter((item) => item.province === filter)
+                  .map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.title}
+                    </option>
+                  ))}
+            </select>
           </div>
         </div>
         <div className="flex justify-center m-4">
@@ -86,29 +116,17 @@ const BookNow = () => {
           </div>
         </div>
 
-        <div className="flex justify-center" >
+        <div className="flex justify-center">
           <div className=" items-center text-base h-40 w-1/3 bg-green-100">
-            <input 
-            required
-            name="NumberOfGuests"
-            type="text-area"
-            className="text-base font-semibold text-green-800 peer block h-40 w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[2.15]"
-            placeholder="Special requests"
-             />
-
+            <input
+              required
+              name="NumberOfGuests"
+              type="textarea"
+              className="text-base font-semibold text-green-800 peer block h-40 w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[2.15]"
+              placeholder="Special requests"
+            />
           </div>
-
-
-
-
         </div>
-
-
-
-
-
-
-
       </form>
     </div>
   );
