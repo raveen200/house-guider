@@ -1,13 +1,22 @@
 import React from "react";
 import { UseStateValue } from "../context/StateProvider";
-import { deleteItem } from "../../utils/firebaseFunctions";
+import {
+  deleteItem,
+  getAllItems,
+  saveItem,
+} from "../../utils/firebaseFunctions";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import ItemsReadOnly from "./ItemsReadOnly";
+import ItemsEdit from "./ItemsEdit";
+import { actionTypes } from "../context/reducer";
 
 const SummaryView = () => {
-  const [{ items, users }] = UseStateValue();
+  const [{ items, users }, dispatch] = UseStateValue();
   const [data, setData] = useState([]);
+  const [editContentId, setEditContentId] = useState(null);
+  // const [newContent, setNewContent] = useState([]);
   ///const data = items;
   useEffect(() => {
     setData(items);
@@ -26,6 +35,61 @@ const SummaryView = () => {
     console.log(`data`, data.length);
   };
 
+  const handleEditClick = (event, item) => {
+    event.preventDefault();
+    setEditContentId(item.title);
+
+    const formValues = {
+      title: item.title,
+      province: item.province,
+      location: item.location,
+      price: item.price,
+    };
+    setEditFormData(formValues);
+  };
+  const [editFormData, setEditFormData] = useState({
+    title: "",
+    province: "",
+    location: "",
+    price: "",
+  });
+  const handleEditFormChange = (event) => {
+    event.preventDefault();
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+    const newFormData = { ...editFormData };
+    newFormData[fieldName] = fieldValue;
+    setEditFormData(newFormData);
+  };
+  const fetchData = async () => {
+    await getAllItems().then((data) => {
+      dispatch({
+        type: actionTypes.SET_ITEMS,
+        items: data,
+      });
+    });
+  };
+
+  const handleEditFormSubmit = async (event) => {
+    console.log(`handleEditFormSubmit editFormData`, editFormData);
+    event.preventDefault();
+    const editedItem = {
+      title: editFormData.title,
+      province: editFormData.province,
+      location: editFormData.location,
+      price: editFormData.price,
+    };
+    await saveItem(editedItem);
+
+    await fetchData();
+
+    setEditContentId(null);
+  };
+
+  const handleCancelClick = () => {
+    setEditContentId(null);
+  };
+
   return (
     <div>
       <div className="flex items-center justify-center mt-4">
@@ -34,70 +98,68 @@ const SummaryView = () => {
         </button>
       </div>
 
-      <div className="flex  justify-between px-1 py-8 gap-2 flex-wrap ">
+      <div className="flex px-1 py-8  gap-2 flex-wrap justify-center ">
         {/* Houses  */}
-        <div className="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
+        <div className="mb-12 md:mb-0 md:w-8/12 lg:w-10/12">
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
             <caption className="flex  justify-center  text-green-600 text-[1rem] lg:text-[2rem] bg-green-100 ">
               Houses
             </caption>
-            <table className="w-full text-sm text-left text-green-100 dark:text-green-100">
-              <thead className="text-xs text-green uppercase bg-green-600 border-b border-green-400 dark:text-green">
-                <tr>
-                  <th scope="col" className="px-6 py-3">
-                    House Title
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Province
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Location
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Price
-                  </th>
-                  <th scope="col" className="px-6 py-3"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {data && data.length ? (
-                  data.map((item) => (
-                    <tr
-                      key={item.id}
-                      className="bg-green-600 border-b border-green-400 hover:bg-green-500"
-                    >
-                      <th
-                        scope="row"
-                        className="px-6 py-4 font-medium text-green-50 whitespace-nowrap dark:text-green-100"
-                      >
-                        {item?.title}
-                      </th>
-                      <td className="px-6 py-4">{item?.province}</td>
-                      <td className="px-6 py-4">{item?.location}</td>
-                      <td className="px-6 py-4">${item?.price}</td>
-                      <td className="px-6 py-4">
-                        <div
-                          className="font-medium text-white  hover:text-red-500 cursor-pointer"
-                          onClick={() => deteteDocument(item.id)}
-                        >
-                          Delete
-                        </div>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <div className="w-full  flex flex-col  items-center justify-center">
-                    <h1 className="text-2xl text-green-600">No Data Found</h1>
-                  </div>
-                )}
-              </tbody>
-            </table>
+            <form>
+              <table className="w-full text-sm text-left text-green-100 dark:text-green-100">
+                <thead className="text-xs text-green uppercase bg-green-600 border-b border-green-400 dark:text-green">
+                  <tr>
+                    <th scope="col" className="px-6 py-3">
+                      House Title
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Province
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Location
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Price
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data && data.length ? (
+                    data.map((item) => (
+                      <>
+                        {editContentId === item.title ? (
+                          <ItemsEdit
+                            editFormData={editFormData}
+                            handleEditFormChange={handleEditFormChange}
+                            handleCancelClick={handleCancelClick}
+                            handleEditFormSubmit={handleEditFormSubmit}
+                          />
+                        ) : (
+                          <ItemsReadOnly
+                            item={item}
+                            deteteDocument={deteteDocument}
+                            handleEditClick={handleEditClick}
+                          />
+                        )}
+                      </>
+                    ))
+                  ) : (
+                    <div className="w-full  flex flex-col  items-center justify-center">
+                      <h1 className="text-2xl text-green-600">No Data Found</h1>
+                    </div>
+                  )}
+                </tbody>
+              </table>
+            </form>
           </div>
         </div>
 
         {/* User */}
 
-        <div>
+        <div className="flex mt-8">
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
             <caption className="flex  item-center justify-center  text-green-600 text-[1rem] lg:text-[2rem] bg-green-100 ">
               Users

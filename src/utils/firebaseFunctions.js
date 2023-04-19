@@ -11,6 +11,7 @@ import { firestore } from "../firebase.config";
 
 // Saving new Item and updating existing item
 export const saveItem = async (data) => {
+  console.log(`saveitem`,data);
   await setDoc(doc(firestore, "Items", data.title), data, {
     merge: true,
   });
