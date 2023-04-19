@@ -192,7 +192,7 @@ const BookNow = (props) => {
 
         <div className="flex justify-center">
           <div className=" items-center text-base h-40 w-3/4 bg-green-100 rounded-lg">
-            <input
+            <textarea
               required
               name="specialRequests"
               value={specialRequests}
