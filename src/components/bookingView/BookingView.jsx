@@ -1,19 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { UseStateValue } from "../context/StateProvider";
+import { Placeholder } from "react-bootstrap";
 
 const BookingView = () => {
   const [{ reservations }] = UseStateValue();
-  console.log(`reservations`, reservations);
+  // console.log(`reservations`, reservations);
 
   const reservationData = reservations;
 
+  const [search, setSearch] = useState("");
+
+  const searchHadler = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const searchFilter = reservationData.filter((reservation) => {
+    return reservation.userAccountEmail
+      .toLowerCase()
+      .includes(search.toLowerCase());
+  });
+  // console.log(`searchFilter`, searchFilter);
+
+
+  
+
+
   return (
     <div className=" h-screen">
-      <div className="flex items-center justify-center m-6">
+      <div className="flex items-center justify-center m-4">
         <button className="bg-green-600 text-white px-4 py-2 rounded-md cursor-pointer">
           <Link to={"/summaryview"}>Users and Houses</Link>
         </button>
+      </div>
+      <div className="flex justify-end items-center">
+        <input
+          type="search"
+          className="border-2 border-green-600 rounded-md p-2 m-2"
+          placeholder="Search by User Email"
+          onChange={searchHadler}
+        />
+       
       </div>
 
       <div>
@@ -21,6 +48,7 @@ const BookingView = () => {
           <caption className="flex  item-center justify-center  text-green-600 text-[1rem] lg:text-[2rem] bg-green-100 ">
             Reservations
           </caption>
+
           <table className="w-full text-sm text-left text-green-100 dark:text-green-100">
             <thead className="text-xs text-green uppercase bg-green-600 border-b border-green-400 dark:text-green">
               <tr>
@@ -51,8 +79,8 @@ const BookingView = () => {
               </tr>
             </thead>
             <tbody>
-              {reservationData && reservationData.length > 0 ? (
-                reservationData.map((reservation) => (
+              {searchFilter && searchFilter.length > 0 ? (
+                searchFilter.map((reservation) => (
                   <tr
                     key={reservation.id}
                     className="bg-green-600 border-b  border-green-400 hover:bg-green-500"
