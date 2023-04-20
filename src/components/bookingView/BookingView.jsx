@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { UseStateValue } from "../context/StateProvider";
 import { Placeholder } from "react-bootstrap";
@@ -22,10 +22,6 @@ const BookingView = () => {
   });
   // console.log(`searchFilter`, searchFilter);
 
-
-  
-
-
   return (
     <div className=" h-screen">
       <div className="flex items-center justify-center m-4">
@@ -40,7 +36,6 @@ const BookingView = () => {
           placeholder="Search by User Email"
           onChange={searchHadler}
         />
-       
       </div>
 
       <div>

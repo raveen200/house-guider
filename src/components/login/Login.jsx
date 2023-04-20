@@ -1,17 +1,20 @@
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Signup from "../signUp/Signup";
 import { UseStateValue } from "../context/StateProvider";
 import { actionTypes } from "../context/reducer";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { app } from "../../firebase.config";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [{ user }, dispatch] = UseStateValue();
- 
-  const firebaseAuth = getAuth(app);
 
+  const navigate = useNavigate();
+  navigate("/*");
+
+  const firebaseAuth = getAuth(app);
 
   const provider = new GoogleAuthProvider();
   const SignUp = async () => {
@@ -94,7 +97,10 @@ const Login = () => {
                 role="button"
                 data-te-ripple-init
                 data-te-ripple-color="light"
-                onClick={SignUp}
+                onClick={() => {
+                  SignUp();
+                  navigate();
+                }}
               >
                 <FcGoogle className="text-2xl" />
                 Continue with Google

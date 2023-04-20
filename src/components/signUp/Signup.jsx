@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import { UseStateValue } from "../context/StateProvider";
 import { actionTypes } from "../context/reducer";
 
+
 const firebaseAuth = getAuth();
 
 
