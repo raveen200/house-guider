@@ -1,12 +1,12 @@
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Signup from "../signUp/Signup";
 import { UseStateValue } from "../context/StateProvider";
 import { actionTypes } from "../context/reducer";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { app } from "../../firebase.config";
-import { useNavigate } from "react-router-dom";
+
 
 const Login = () => {
   const [{ user }, dispatch] = UseStateValue();
