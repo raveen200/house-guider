@@ -24,7 +24,7 @@ export const Nav = () => {
   const [isMenu, setIsMenu] = useState(false);
   const [validEmails, setValidEmails] = useState([
     "raveensamudika@gmail.com",
-    "codiepredators@gmail.com",
+   
     "amithb777@gmail.com",
   ]);
 
