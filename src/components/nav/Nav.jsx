@@ -25,7 +25,7 @@ export const Nav = () => {
   const [validEmails, setValidEmails] = useState([
     "raveensamudika@gmail.com",
     "sidathliyanage111@gmail.com",
-    "amithb777@gmail.com",
+    "pramilamaduwantha38@gmail.com",
   ]);
 
   const login = async () => {
